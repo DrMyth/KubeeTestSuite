@@ -1,0 +1,18 @@
+const { defineConfig } = require("cypress");
+require('dotenv').config()
+
+module.exports = defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {
+      require("cypress-mochawesome-reporter/plugin")(on);
+    },
+  },
+  experimentalStudio: true,
+  video: true,
+  reporter: "cypress-mochawesome-reporter",
+  env: {
+    EMAIL: process.env.EMAIL,
+    PASSWORD: process.env.PASSWORD,
+    WORK_MODE: process.env.WORK_MODE,
+  },
+});

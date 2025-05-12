@@ -1,0 +1,28 @@
+{
+  "name": "kubeeanalytics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tests": "cypress open",
+    "e2e:run": "cypress run --spec cypress/e2e/Auth/**/*.cy.js --browser chrome --headed",
+    "e2e:edge": "cypress run --spec cypress/e2e/Auth/**/*.cy.js --browser edge --headed",
+    "e2e:edge:headless": "cypress run --spec cypress/e2e/Auth/**/*.cy.js --browser edge --headless",
+    "e2e:chrome:headless": "cypress run --spec cypress/e2e/Auth/**/*.cy.js --browser chrome --headless"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cypress": "^14.2.1",
+    "dayjs": "^1.11.13"
+  },
+  "devDependencies": {
+    "cypress-file-upload": "^5.0.8",
+    "cypress-mochawesome-reporter": "^3.8.2",
+    "cypress-real-events": "^1.14.0",
+    "dotenv": "^16.5.0"
+  }
+}
