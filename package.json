@@ -9,6 +9,7 @@
     "e2e:run": "cypress run --spec cypress/e2e/Auth/**/*.cy.js --browser chrome --headed",
     "e2e:edge": "cypress run --spec cypress/e2e/Auth/**/*.cy.js --browser edge --headed",
     "e2e:edge:headless": "cypress run --spec cypress/e2e/Auth/**/*.cy.js --browser edge --headless",
+    "e2e:test": "cypress run --spec cypress/e2e/Auth/signin.cy.js --browser edge --headless",
     "e2e:chrome:headless": "cypress run --spec cypress/e2e/Auth/**/*.cy.js --browser chrome --headless"
   },
   "keywords": [],
