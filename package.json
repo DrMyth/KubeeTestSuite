@@ -10,7 +10,10 @@
     "e2e:edge": "cypress run --spec cypress/e2e/Auth/**/*.cy.js --browser edge --headed",
     "e2e:edge:headless": "cypress run --spec cypress/e2e/Auth/**/*.cy.js --browser edge --headless",
     "e2e:test": "cypress run --spec cypress/e2e/Auth/signin.cy.js --browser edge --headless",
-    "e2e:chrome:headless": "cypress run --spec cypress/e2e/Auth/**/*.cy.js --browser chrome --headless"
+    "e2e:chrome:headless": "cypress run --spec cypress/e2e/Auth/**/*.cy.js --browser chrome --headless",
+    "e2e:electron": "cypress run --spec cypress/e2e/Auth/**/*.cy.js --headed",
+    "e2e:electron:headless": "cypress run --spec cypress/e2e/Auth/**/*.cy.js --headless",
+    "e2e:electron:test": "cypress run --spec cypress/e2e/Auth/signin.cy.js --headless"
   },
   "keywords": [],
   "author": "",
