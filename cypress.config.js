@@ -14,5 +14,7 @@ module.exports = defineConfig({
     EMAIL: process.env.EMAIL,
     PASSWORD: process.env.PASSWORD,
     WORK_MODE: process.env.WORK_MODE,
+    TEST_URL: process.env.TEST_URL,
+    PASSWORD_PLAIN_TEXT: process.env.PASSWORD_PLAIN_TEXT,
   },
 });

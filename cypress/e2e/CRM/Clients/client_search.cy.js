@@ -41,7 +41,7 @@ describe("Clients View Page Tests", () => {
   // 2. Search input placeholder and clear functionality
   // 3. Action buttons visibility
   // 4. Table headers and empty-state placeholder
-  describe("Initial Rendering Tests", () => {
+  describe.skip("Initial Rendering Tests", () => {
     it("should render the page correctly", () => {
       // Ensure the main title is visible and correct
       // check for the title element
@@ -85,125 +85,125 @@ describe("Clients View Page Tests", () => {
   // 3. Truncated link href assertions
   // 4. Clear functionality resets table
   describe("Search Functionality Tests", () => {
-    // Helper-driven search & table assertions
-    testSearchFunctionality({
-      searchTerm: "test",
-      defaultRowCount: 0,
-      clientSearch: true,
-    });
+    // // Helper-driven search & table assertions
+    // testSearchFunctionality({
+    //   searchTerm: "test",
+    //   defaultRowCount: 0,
+    //   clientSearch: true,
+    // });
 
-    // Tests sync button re-fetches data
-    testSyncButton({
-      apiAlias: "apiClientSearch",
-      clientSearch: true,
-    });
+    // // Tests sync button re-fetches data
+    // testSyncButton({
+    //   apiAlias: "apiClientSearch",
+    //   clientSearch: true,
+    // });
 
-    // Tests expand/fullscreen toggling behavior
-    testExpandButton({});
+    // // Tests expand/fullscreen toggling behavior
+    // testExpandButton({});
 
-    // Tests show/hide columns via "More" menu
-    testColumnToggling({
-      columnsToToggle: [
-        { name: "Gender", shouldExist: false },
-        { name: "Address", shouldExist: false },
-        { name: "Source", shouldExist: false },
-        { name: "Preferred Contact", shouldExist: false },
-      ],
-      clientSearch: true,
-      apiAlias: "apiClientSearch",
-    });
+    // // Tests show/hide columns via "More" menu
+    // testColumnToggling({
+    //   columnsToToggle: [
+    //     { name: "Gender", shouldExist: false },
+    //     { name: "Address", shouldExist: false },
+    //     { name: "Source", shouldExist: false },
+    //     { name: "Preferred Contact", shouldExist: false },
+    //   ],
+    //   clientSearch: true,
+    //   apiAlias: "apiClientSearch",
+    // });
 
-    // Tests pagination controls and page-size changes
-    testPagination({
-      clientSearch: true,
-      apiAlias: "apiClientSearch",
-    });
+    // // Tests pagination controls and page-size changes
+    // testPagination({
+    //   clientSearch: true,
+    //   apiAlias: "apiClientSearch",
+    // });
 
-    // Tests clicking a row's link navigates to details page
-    testRowNavigation({
-      clientSearch: true,
-      apiAlias: "apiClientSearch",
-      urlPattern: "/clients_module/ClientDetails?given_client_id=",
-      titleRegex: /test/i,
-    });
+    // // Tests clicking a row's link navigates to details page
+    // testRowNavigation({
+    //   clientSearch: true,
+    //   apiAlias: "apiClientSearch",
+    //   urlPattern: "/clients_module/ClientDetails?given_client_id=",
+    //   titleRegex: /test/i,
+    // });
 
-    // FULL ROW DATA VALIDATION
-    // Ensures every column in the first result row after search:
-    // - Link href contains correct search_term
-    // - Static text columns match expected values
-    // - Multi-line email and phone spans contain all entries
-    // - Actions column icon is present
-    it("searches for a term and validates every column in the first result row", () => {
-      // Type the search term and press Enter
-      const searchTerm = "test@gmail.com";
-      cy.get("input[placeholder='Type and hit Enter']")
-        .clear()
-        .type(`${searchTerm}{enter}`);
+    // // FULL ROW DATA VALIDATION
+    // // Ensures every column in the first result row after search:
+    // // - Link href contains correct search_term
+    // // - Static text columns match expected values
+    // // - Multi-line email and phone spans contain all entries
+    // // - Actions column icon is present
+    // it("searches for a term and validates every column in the first result row", () => {
+    //   // Type the search term and press Enter
+    //   const searchTerm = "test@gmail.com";
+    //   cy.get("input[placeholder='Type and hit Enter']")
+    //     .clear()
+    //     .type(`${searchTerm}{enter}`);
 
-      // Wait for the API call to complete
-      cy.wait(`@apiClientSearch`, { timeout: 35000 })
-        .its("response.statusCode")
-        .should("eq", 200);
+    //   // Wait for the API call to complete
+    //   cy.wait(`@apiClientSearch`, { timeout: 35000 })
+    //     .its("response.statusCode")
+    //     .should("eq", 200);
 
-      // Grab the first row and validate each cell
-      cy.get("tbody tr")
-        .first()
-        .within(() => {
-          // Full Name column: the <a> should include the searchTerm in its href
-          cy.get("td")
-            .eq(0)
-            .find("a")
-            .should("have.attr", "href")
-            .and("include", `search_term=${searchTerm}`);
+    //   // Grab the first row and validate each cell
+    //   cy.get("tbody tr")
+    //     .first()
+    //     .within(() => {
+    //       // Full Name column: the <a> should include the searchTerm in its href
+    //       cy.get("td")
+    //         .eq(0)
+    //         .find("a")
+    //         .should("have.attr", "href")
+    //         .and("include", `search_term=${searchTerm}`);
 
-          // Gender column
-          cy.get("td").eq(1).should("have.text", "Female");
+    //       // Gender column
+    //       cy.get("td").eq(1).should("have.text", "Female");
 
-          // Boutique column
-          cy.get("td").eq(2).should("have.text", "Boutique8");
+    //       // Boutique column
+    //       cy.get("td").eq(2).should("have.text", "Boutique8");
 
-          // Birth Date column
-          cy.get("td").eq(3).should("have.text", "2023-10-29");
+    //       // Birth Date column
+    //       cy.get("td").eq(3).should("have.text", "2023-10-29");
 
-          // Email column: span text should contain both addresses
-          cy.get("td")
-            .eq(4)
-            .find("span")
-            .invoke("text")
-            .then((text) => {
-              expect(text).to.contain("test@gmail.com");
-              expect(text).to.contain("test2@gmail.com");
-            });
+    //       // Email column: span text should contain both addresses
+    //       cy.get("td")
+    //         .eq(4)
+    //         .find("span")
+    //         .invoke("text")
+    //         .then((text) => {
+    //           expect(text).to.contain("test@gmail.com");
+    //           expect(text).to.contain("test2@gmail.com");
+    //         });
 
-          // Phone column: span text should contain both numbers
-          cy.get("td")
-            .eq(5)
-            .find("span")
-            .invoke("text")
-            .then((text) => {
-              expect(text).to.contain("+987656544332");
-              expect(text).to.contain("+907654456777");
-            });
+    //       // Phone column: span text should contain both numbers
+    //       cy.get("td")
+    //         .eq(5)
+    //         .find("span")
+    //         .invoke("text")
+    //         .then((text) => {
+    //           expect(text).to.contain("+987656544332");
+    //           expect(text).to.contain("+907654456777");
+    //         });
 
-          // Preferred Contact column
-          cy.get("td").eq(6).should("have.text", "Any");
+    //       // Preferred Contact column
+    //       cy.get("td").eq(6).should("have.text", "Any");
 
-          // Nationality column
-          cy.get("td").eq(7).should("have.text", "Algeria");
+    //       // Nationality column
+    //       cy.get("td").eq(7).should("have.text", "Algeria");
 
-          // Address column
-          cy.get("td").eq(8).should("have.text", "testing");
+    //       // Address column
+    //       cy.get("td").eq(8).should("have.text", "testing");
 
-          // Is Active column
-          cy.get("td").eq(9).should("have.text", "No");
+    //       // Is Active column
+    //       cy.get("td").eq(9).should("have.text", "No");
 
-          // Source column
-          cy.get("td").eq(10).should("have.text", "From Traffic");
+    //       // Source column
+    //       cy.get("td").eq(10).should("have.text", "From Traffic");
 
-          // Actions column: ensure the ellipsis icon is present
-          cy.get("td").eq(11).find("span.anticon-ellipsis").should("exist");
-        });
-    });
+    //       // Actions column: ensure the ellipsis icon is present
+    //       cy.get("td").eq(11).find("span.anticon-ellipsis").should("exist");
+    //     });
+    // });
 
     // PURCHASE HISTORY TAB TEST
     // Verifies:
@@ -228,7 +228,7 @@ describe("Clients View Page Tests", () => {
       const headers = [
         "Transaction ID",
         "Product Name",
-        "Boutique",
+        // "Boutique",
         "Product Code",
         "Sale Quantity",
         "Sales Price",

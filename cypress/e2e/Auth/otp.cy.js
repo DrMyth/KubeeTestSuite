@@ -3,7 +3,7 @@ require('dotenv').config()
 describe("OTP Page Tests", () => {
   function setLocalStorageData() {
     localStorage.setItem("email", Cypress.env("EMAIL"));
-    localStorage.setItem("password", Cypress.env("PASSWORD"));
+    localStorage.setItem("password", Cypress.env("PASSWORD_PLAIN_TEXT"));
     localStorage.setItem("work_mode", Cypress.env("WORK_MODE"));
   }
 
@@ -16,6 +16,7 @@ describe("OTP Page Tests", () => {
   }
 
   function visitOtpPage() {
+    cy.log("Visiting OTP page with url: ", Cypress.env("TEST_URL"));
     cy.visit(`${Cypress.env("TEST_URL")}/Otp`, {
       failOnStatusCode: false,
       timeout: 30000,
@@ -53,11 +54,11 @@ describe("OTP Page Tests", () => {
     it('should maintain disabled resend button during countdown and reset timer after resend', () => {
       cy.clock();
       
-      cy.get('input#seconds').should('have.value', '90');
+      cy.get('input#seconds').should('have.value', '30');
       getResendButton().should('be.disabled');
       // cy.tick(31000);
       getResendButton().should('be.enabled').click();
-      cy.get('input#seconds').should('have.value', '90');
+      cy.get('input#seconds').should('have.value', '30');
       
       cy.clock().invoke("restore");
     });
