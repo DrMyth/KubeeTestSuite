@@ -16,7 +16,7 @@ describe("OTP Page Tests", () => {
   }
 
   function visitOtpPage() {
-    cy.visit("https://bmsredesign.kubeedevelopment.com/Otp", {
+    cy.visit(`${Cypress.env("TEST_URL")}/Otp`, {
       failOnStatusCode: false,
       timeout: 30000,
     });
@@ -89,7 +89,7 @@ describe("OTP Page Tests", () => {
     });
   });
 
-  //Helper Functions
+  // HELPER FUNCTIONS
   function getResendButton() {
     return cy.get('button:contains("Resend in")', {timeout: 90001});
   }

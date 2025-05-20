@@ -9,7 +9,11 @@
     "e2e:electron": "cypress run --spec cypress/e2e/Auth/**/*.cy.js --headed",
     "e2e:electron:headless": "cypress run --spec cypress/e2e/Auth/**/*.cy.js --headless",
     "e2e:electron:test": "cypress run --spec cypress/e2e/Auth/signin.cy.js --headless",
-    "e2e:electron:fail": "cypress run --spec cypress/e2e/Auth/fail.cy.js --headless"
+    "e2e:electron:fail": "cypress run --spec cypress/e2e/Auth/fail.cy.js --headless",
+    "e2e:electron:parallel": "cypress run --spec cypress/e2e/**/*.cy.js,!cypress/e2e/**/signout.cy.js --headless",
+    "e2e:electron:parallel:auth": "cypress run --spec cypress/e2e/Auth/**/*.cy.js --headless",
+    "e2e:electron:parallel:crm": "cypress run --spec cypress/e2e/CRM/Clients/**/*.cy.js --headless",
+    "e2e:electron:parallel:traffic": "cypress run --spec cypress/e2e/CRM/Traffic Analysis/**/*.cy.js --headless"
   },
   "keywords": [],
   "author": "",

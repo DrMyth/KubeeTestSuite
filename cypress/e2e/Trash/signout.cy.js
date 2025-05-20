@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 describe("Logout Functionality", () => {
   function configureTestEnvironment() {
     cy.on("uncaught:exception", (err) => {
@@ -8,19 +10,17 @@ describe("Logout Functionality", () => {
   }
 
   beforeEach(() => {
-    Cypress.session.clearAllSavedSessions(); // Clear session cache
-    // Register a session named "loggedInSession" to avoid side effects.
+    Cypress.session.clearAllSavedSessions(); 
     cy.session("loggedInSession", () => {
       cy.login();
     });
     configureTestEnvironment();
     cy.visit(
-      "https://bmsredesign.kubeedevelopment.com/dashboard_module/Dashboard"
+      `${Cypress.env("TEST_URL")}/dashboard_module/Dashboard`
     );
     cy.contains("Dashboard", { timeout: 10000 }).should("be.visible");
   });
 
-  // Verify that logout clears localStorage and redirects to the signin page.
   describe("Logout Functionality - Clear Session and Redirect", () => {
     it("should clear localStorage and redirect to login on logout", () => {
         clickLogoutButton();
@@ -29,12 +29,11 @@ describe("Logout Functionality", () => {
     });
   });
 
-  // Verify that after logout, protected routes cannot be accessed.
   describe("Logout Functionality - Protected Route Access", () => {
     it("should not allow access to a protected route after logout", () => {
         clickLogoutButton();
         cy.url({ timeout: 10000 }).should("include", "/signin");
-        cy.visit("https://bmsredesign.kubeedevelopment.com/settings/MyProfile", {
+        cy.visit(`${Cypress.env("TEST_URL")}/settings/MyProfile`, {
           failOnStatusCode: false,
         });
         verifyLocalStorageCleared();
@@ -42,7 +41,7 @@ describe("Logout Functionality", () => {
     });
   });
 
-  //Helper Functions
+  // HELPER FUNCTIONS
   function clickLogoutButton() {
     cy.get("#corner_picture").click();
     cy.contains("Log Out").should("be.visible").click();

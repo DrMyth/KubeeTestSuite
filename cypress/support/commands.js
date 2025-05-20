@@ -55,7 +55,7 @@ Cypress.Commands.add("login", () => {
       configureTestEnvironment();
       setLocalStorageData();
 
-      cy.visit("https://bmsredesign.kubeedevelopment.com/Otp", {
+      cy.visit(`${Cypress.env("TEST_URL")}/Otp`, {
         timeout: 150000,
       });
 

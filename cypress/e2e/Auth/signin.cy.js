@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 describe("Signin Page Tests", () => {
 
   function configureTestEnvironment() {
@@ -9,7 +11,7 @@ describe("Signin Page Tests", () => {
   }
 
   function visitSigninPage(){
-    cy.visit("https://bmsredesign.kubeedevelopment.com/signin", {
+    cy.visit(`${Cypress.env("TEST_URL")}/signin`, {
       onBeforeLoad(win) {
         win.event = { currentTarget: win.document.querySelector("form") };
       },
@@ -86,7 +88,7 @@ describe("Signin Page Tests", () => {
     });
   });
 
-  // Helper Functions
+  // HELPER FUNCTIONS
   function getEmailInput() {
     return cy.get('input[placeholder="Email address"]');
   }
