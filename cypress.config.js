@@ -10,6 +10,7 @@ module.exports = defineConfig({
   experimentalStudio: true,
   video: true,
   reporter: "cypress-mochawesome-reporter",
+  experimentalMemoryManagement: true,
   env: {
     EMAIL: process.env.EMAIL,
     PASSWORD: process.env.PASSWORD,

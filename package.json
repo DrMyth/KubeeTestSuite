@@ -13,10 +13,11 @@
     "e2e:electron:parallel": "cypress run --spec cypress/e2e/**/*.cy.js,!cypress/e2e/**/signout.cy.js --headless",
     "e2e:electron:parallel:auth": "cypress run --spec cypress/e2e/Auth/signin.cy.js --headless",
     "e2e:electron:parallel:clients": "cypress run --spec cypress/e2e/CRM/Clients/client_search.cy.js --headless",
-    "e2e:electron:parallel:traffic": "cypress run --spec cypress/e2e/CRM/Traffic_Analysis/dashboard.cy.js --headless",
+    "e2e:electron:parallel:traffic": "cypress run --spec cypress/e2e/CRM/Traffic_Analysis/view.cy.js --headless",
     "e2e:electron:parallel:auth:headed": "cypress run --spec cypress/e2e/Auth/signin.cy.js --headed",
     "e2e:electron:parallel:clients:headed": "cypress run --spec cypress/e2e/CRM/Clients/client_search.cy.js --headed",
-    "e2e:electron:parallel:traffic:headed": "cypress run --spec cypress/e2e/CRM/Traffic_Analysis/dashboard.cy.js --headed"
+    "e2e:electron:parallel:traffic:headed": "cypress run --spec cypress/e2e/CRM/Traffic_Analysis/view.cy.js --headed",
+    "e2e:electron:parallel:traffic:test": "cypress run --spec cypress/e2e/CRM/Traffic_Analysis/dashboard.cy.js --headed"
   },
   "keywords": [],
   "author": "",
