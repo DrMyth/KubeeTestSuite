@@ -479,7 +479,7 @@ describe("Sales View Page Tests", () => {
 
         // Wait for the request, then assert on URL and response headers
         cy.wait("@exportSales", { timeout: 35000 }).then(() => {
-          const fileName = "sales.xlsx";
+          const fileName = "Sales.xlsx";
           cy.readFile(`cypress/downloads/${fileName}`, { timeout: 15000 })
             .should("exist")
             .and((buf) => {

@@ -383,7 +383,7 @@ describe("Clients View Page Tests", () => {
 
         // Wait for the request, then assert on URL and response headers
         cy.wait("@clientList", { timeout: 90000 }).then(() => {
-          const fileName = "clients.xlsx";
+          const fileName = "Clients.xlsx";
           cy.readFile(`cypress/downloads/${fileName}`, { timeout: 15000 })
             .should("exist")
             .and((buf) => {
@@ -610,13 +610,13 @@ describe("Clients View Page Tests", () => {
         .and("not.be.disabled")
         .realClick();
 
+      // wait for the API call to complete
+      cy.wait("@saveWallet").its("response.statusCode").should("eq", 200);
+
       // verify that the message is displayed
       cy.get(".ant-message-notice")
         .should("be.visible")
         .and("contain.text", "Transaction has been created successfully!");
-
-      // wait for the API call to complete
-      cy.wait("@saveWallet").its("response.statusCode").should("eq", 200);
 
       // verify that the cancel button is displayed
       cy.get(".ant-modal-footer")
