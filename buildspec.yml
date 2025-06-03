@@ -1,0 +1,89 @@
+version: 0.2
+
+batch:
+  build-list:
+    - identifier: worker1
+      env:
+        variables:
+          WORKER: "worker1"
+    - identifier: worker2
+      env:
+        variables:
+          WORKER: "worker2"
+    - identifier: worker3
+      env:
+        variables:
+          WORKER: "worker3"
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo "[Install Phase] Installing Node.js dependencies..."
+      - npm ci
+      - echo "[Install Phase] Installing system dependencies for Cypress..."
+      - apt-get install -y libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 xvfb
+      - echo "[Install Phase] System dependencies installed."
+
+  pre_build:
+    commands:
+      - echo "[Pre-Build Phase] Preparing environment variables..."
+      - echo "CI mode active. Hiding sensitive variables from logs."
+      - |
+        if [ -z "$TEST_URL" ]; then
+          echo "ERROR: TEST_URL is not set."; exit 1;
+        fi
+        if [ -z "$TEST_BACKEND_URL" ]; then
+          echo "ERROR: TEST_BACKEND_URL is not set."; exit 1;
+        fi
+        if [ -z "$WORK_MODE" ]; then
+          echo "ERROR: WORK_MODE is not set."; exit 1;
+        fi
+        if [ -z "$EMAIL" ]; then
+          echo "ERROR: EMAIL is not set."; exit 1;
+        fi
+        if [ -z "$PASSWORD" ]; then
+          echo "ERROR: PASSWORD is not set."; exit 1;
+        fi
+        if [ -z "$PASSWORD_HASHED" ]; then
+          echo "ERROR: PASSWORD_HASHED is not set."; exit 1;
+        fi
+      - echo "[Pre-Build Phase] All required environment variables are set."
+      
+  build:
+    commands:
+      - echo "[Build Phase] Running Cypress E2E tests using Electron..."
+      - echo "[Build][$SUITE] running suite"
+      - |
+        case "$WORKER" in
+          worker1)
+            echo "→ Running tests on worker1..."
+            npm run e2e:worker1
+            ;;
+          worker2)
+            echo "→ Running tests on worker2..."
+            npm run e2e:worker2
+            ;;
+          worker3)
+            echo "→ Running tests on worker3..."
+            npm run e2e:worker3
+            ;;
+          *)
+            echo "Unknown worker: $WORKER" >&2
+            exit 1
+            ;;
+        esac
+      
+  post_build:
+    commands:
+      - echo "[Post-Build Phase] Build complete. Artifacts will be uploaded."
+
+artifacts:
+  name: test‑artifacts-${WORKER}
+  files:
+    - cypress/reports/**/*
+    - cypress/videos/**/*.mp4
+    - cypress/screenshots/**/* 
+    - cypress/Downloads/**/*
+  discard-paths: no
