@@ -1,0 +1,33 @@
+{
+  "name": "kubeeanalytics",
+  "version": "1.0.0",
+  "description": "Test Suite for KubeeAnalytics BMS",
+  "main": "cypress/e2e",
+  "scripts": {
+    "tests": "cypress open",
+    "e2e:worker1": "cypress run --spec \"cypress/e2e/BMS/CRM/Clients/view.cy.js,cypress/e2e/BMS/dashboard.cy.js,cypress/e2e/Auth/otp.cy.js\" --headless",
+    "e2e:worker2": "cypress run --spec \"cypress/e2e/BMS/Sales/view.cy.js,cypress/e2e/BMS/CRM/Traffic_Analysis/view.cy.js,cypress/e2e/Settings/profile.cy.js,cypress/e2e/Auth/signin.cy.js\" --headless",
+    "e2e:worker3": "cypress run --spec \"cypress/e2e/BMS/Invoices/view.cy.js,cypress/e2e/BMS/CRM/Clients/client_details.cy.js,cypress/e2e/BMS/CRM/Clients/client_search.cy.js,cypress/e2e/BMS/CRM/Traffic_Analysis/dashboard.cy.js\" --headless",
+    "e2e:worker1:headed": "cypress run --spec \"cypress/e2e/BMS/CRM/Clients/view.cy.js,cypress/e2e/BMS/dashboard.cy.js,cypress/e2e/Auth/otp.cy.js\" --headed",
+    "e2e:worker2:headed": "cypress run --spec \"cypress/e2e/BMS/Sales/view.cy.js,cypress/e2e/BMS/CRM/Traffic_Analysis/view.cy.js,cypress/e2e/Settings/profile.cy.js,cypress/e2e/Auth/signin.cy.js\" --headed",
+    "e2e:worker3:headed": "cypress run --spec \"cypress/e2e/BMS/Invoices/view.cy.js,cypress/e2e/BMS/CRM/Clients/client_details.cy.js,cypress/e2e/BMS/CRM/Clients/client_search.cy.js,cypress/e2e/BMS/CRM/Traffic_Analysis/dashboard.cy.js\" --headed",
+    "e2e:signout": "cypress run --spec cypress/e2e/Auth/signout.cy.js --headless",
+    "e2e:electron:test": "cypress run --spec cypress/e2e/Auth/signin.cy.js --headless",
+    "e2e:electron:test:headed": "cypress run --spec cypress/e2e/Auth/signin.cy.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cypress": "^14.2.1",
+    "dayjs": "^1.11.13"
+  },
+  "devDependencies": {
+    "cypress-dotenv": "^3.0.1",
+    "cypress-file-upload": "^5.0.8",
+    "cypress-mochawesome-reporter": "^3.8.2",
+    "cypress-real-events": "^1.14.0",
+    "dotenv": "^16.5.0"
+  }
+}
