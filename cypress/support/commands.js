@@ -60,7 +60,6 @@ Cypress.Commands.add("login", () => {
       cy.intercept("POST", "**/login").as("login");
 
       configureTestEnvironment();
-      // setLocalStorageData();
 
       // Visit the signin page
       cy.visit(`${Cypress.env("TEST_URL")}/signin`, {
