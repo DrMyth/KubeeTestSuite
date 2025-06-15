@@ -30,7 +30,7 @@ Cypress.Commands.add(
   "forceClick",
   { prevSubject: "element" },
   (subject, options) => {
-    // Click the element with force
+    // Click the element with force {For the elements that are covered with overlays}
     cy.wrap(subject).click({ force: true });
   }
 );
